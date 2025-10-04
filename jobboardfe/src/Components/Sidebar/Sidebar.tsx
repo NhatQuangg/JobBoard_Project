@@ -17,10 +17,10 @@ const navigation = [
     { name: "Feed", href: "/feed", icon: FileText },
     { name: "Inbox", href: "/inbox", icon: Inbox, badge: 1 },
     { name: "Jobs", href: "/jobs", icon: Briefcase },
-    { name: "Events", href: "/events", icon: Calendar },
+    // { name: "Events", href: "/events", icon: Calendar },
     { name: "People", href: "/people", icon: Users, isNew: true },
     { name: "Employers", href: "/employers", icon: Building2 },
-    { name: "Career center", href: "/career-center", icon: GraduationCap },
+    // { name: "Career center", href: "/career-center", icon: GraduationCap },
 ];
 
 const Sidebar = (props: Props) => {
