@@ -19,9 +19,7 @@ namespace api.Models
         // ===================================
         // Foreign key
         public int UserId { get; set; }
-
-        // Navigation property with [ForeignKey] attribute
-        // [ForeignKey("UserId")]
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }

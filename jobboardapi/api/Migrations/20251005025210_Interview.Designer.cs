@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -10,9 +11,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251005025210_Interview")]
+    partial class Interview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace api.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Application");
                 });
 
             modelBuilder.Entity("api.Models.CandidateProfile", b =>
@@ -157,47 +160,6 @@ namespace api.Migrations
                     b.ToTable("Interviews");
                 });
 
-            modelBuilder.Entity("api.Models.JobCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobCategories");
-                });
-
-            modelBuilder.Entity("api.Models.JobCategory_Posting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsPrimary")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("JobId");
-
-                    b.ToTable("JobCategory_Postings");
-                });
-
             modelBuilder.Entity("api.Models.JobPosting", b =>
                 {
                     b.Property<int>("Id")
@@ -219,7 +181,7 @@ namespace api.Migrations
                     b.Property<string>("Duration")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("EmployerId")
+                    b.Property<int>("EmployerID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ExpiresAt")
@@ -263,9 +225,9 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployerId");
+                    b.HasIndex("EmployerID");
 
-                    b.ToTable("JobPostings");
+                    b.ToTable("JobPosting");
                 });
 
             modelBuilder.Entity("api.Models.Message", b =>
@@ -296,30 +258,6 @@ namespace api.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("api.Models.SavedJob", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CandidateId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("SavedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CandidateId");
-
-                    b.HasIndex("JobId");
-
-                    b.ToTable("SavedJobs");
                 });
 
             modelBuilder.Entity("api.Models.User", b =>
@@ -419,30 +357,11 @@ namespace api.Migrations
                     b.Navigation("Application");
                 });
 
-            modelBuilder.Entity("api.Models.JobCategory_Posting", b =>
-                {
-                    b.HasOne("api.Models.JobCategory", "Category")
-                        .WithMany("JobPostings")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.JobPosting", "Job")
-                        .WithMany()
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Job");
-                });
-
             modelBuilder.Entity("api.Models.JobPosting", b =>
                 {
                     b.HasOne("api.Models.EmployerProfile", "Employer")
                         .WithMany()
-                        .HasForeignKey("EmployerId")
+                        .HasForeignKey("EmployerID")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -468,25 +387,6 @@ namespace api.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("api.Models.SavedJob", b =>
-                {
-                    b.HasOne("api.Models.CandidateProfile", "Candidate")
-                        .WithMany()
-                        .HasForeignKey("CandidateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.JobPosting", "Job")
-                        .WithMany()
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Candidate");
-
-                    b.Navigation("Job");
-                });
-
             modelBuilder.Entity("api.Models.User", b =>
                 {
                     b.HasOne("api.Models.CandidateProfile", "CandidateProfile")
@@ -504,11 +404,6 @@ namespace api.Migrations
                     b.Navigation("CandidateProfile");
 
                     b.Navigation("EmployerProfile");
-                });
-
-            modelBuilder.Entity("api.Models.JobCategory", b =>
-                {
-                    b.Navigation("JobPostings");
                 });
 
             modelBuilder.Entity("api.Models.JobPosting", b =>

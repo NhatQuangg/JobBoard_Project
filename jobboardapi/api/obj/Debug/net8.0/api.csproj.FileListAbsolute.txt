@@ -208,3 +208,4 @@
 /Users/quangnguyen/JobBoardProject/jobboardapi/api/obj/Debug/net8.0/api.pdb
 /Users/quangnguyen/JobBoardProject/jobboardapi/api/obj/Debug/net8.0/api.genruntimeconfig.cache
 /Users/quangnguyen/JobBoardProject/jobboardapi/api/obj/Debug/net8.0/ref/api.dll
+/Users/quangnguyen/JobBoardProject/jobboardapi/api/obj/Debug/net8.0/api.sourcelink.json

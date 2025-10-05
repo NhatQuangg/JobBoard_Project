@@ -28,9 +28,9 @@ namespace api.Models
         public int? SaveJob { get; set; }
         public string? Status { get; set; }
         // Foreign key
-        public int EmployerID { get; set; }
+        public int EmployerId { get; set; }
 
-        [ForeignKey("EmployerID")]
+        [ForeignKey("EmployerId")]
         public EmployerProfile Employer { get; set; }
 
         public ICollection<Application> Applications { get; set; }

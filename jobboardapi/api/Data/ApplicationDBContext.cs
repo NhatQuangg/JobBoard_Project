@@ -15,14 +15,14 @@ namespace api.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<CandidateProfile> CandidateProfiles { get; set; }
-        // public DbSet<EmployerProfile> EmployerProfiles { get; set; }
-        // public DbSet<Message> Messages { get; set; }
-        // public DbSet<Interview> Interviews { get; set; }
-        // public DbSet<Application> Applications { get; set; }
-        // public DbSet<JobPosting> JobPostings { get; set; }
-        // public DbSet<JobCategory> JobCategories { get; set; }
-        // public DbSet<JobCategory_Posting> JobCategory_Postings { get; set; }
-        // public DbSet<SavedJob> SavedJobs { get; set; }
+        public DbSet<EmployerProfile> EmployerProfiles { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Interview> Interviews { get; set; }
+        public DbSet<Application> Applications { get; set; }
+        public DbSet<JobPosting> JobPostings { get; set; }
+        public DbSet<SavedJob> SavedJobs { get; set; }
+        public DbSet<JobCategory> JobCategories { get; set; }
+        public DbSet<JobCategory_Posting> JobCategory_Postings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
