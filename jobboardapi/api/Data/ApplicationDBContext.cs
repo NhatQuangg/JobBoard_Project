@@ -9,9 +9,8 @@ namespace api.Data
 {
     public class ApplicationDBContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
-        {
-        }
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
+            : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<CandidateProfile> CandidateProfiles { get; set; }
@@ -24,14 +23,16 @@ namespace api.Data
         public DbSet<JobCategory> JobCategories { get; set; }
         public DbSet<JobCategory_Posting> JobCategory_Postings { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // GLOBAL: Tắt cascade delete cho tất cả relationships để tránh multiple cascade paths
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes()
-                .SelectMany(e => e.GetForeignKeys()))
+            foreach (
+                var relationship in modelBuilder
+                    .Model.GetEntityTypes()
+                    .SelectMany(e => e.GetForeignKeys())
+            )
             {
                 relationship.DeleteBehavior = DeleteBehavior.NoAction;
             }
