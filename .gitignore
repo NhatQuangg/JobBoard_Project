@@ -1,50 +1,63 @@
-# macOS
+# General
+# -----------------------------------------------------------------------------
 .DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+tmp/
+*.tmp
 
-# Editor/IDE
+# IDEs & Editors
+# -----------------------------------------------------------------------------
 .vscode/
 .idea/
+.vs/
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# .NET / C# Project (jobboardapi)
+# -----------------------------------------------------------------------------
+# Ignore build output folders
+[Bb]in/
+[Oo]bj/
 
-# Node
-jobboardfe/node_modules/
-jobboardfe/build/
-jobboardfe/dist/
-jobboardfe/.cache/
-jobboardfe/.parcel-cache/
-jobboardfe/coverage/
-jobboardfe/.env*
-# keep package-lock.json / pnpm-lock.yaml / yarn.lock committed
+# Ignore sensitive app settings
+jobboardapi/api/appsettings.Development.json
 
-# .NET
-/jobboardapi/bin/
-/jobboardapi/obj/
-/jobboardapi/*.pdb
-/jobboardapi/*.dll
-.vs/
-
-# App settings / secrets
-jobboardapi/appsettings.Development.json
-*.pem
-*.pfx
-secrets/
-.env
-.env.local
+# Ignore user-specific files
+*.pdb
+*.dll
+*.exe
 
 # Database files
 *.mdf
 *.sqlite
 *.db
 
-# Other
-tmp/
-*.tmp
+# Security
+*.pem
+*.pfx
+secrets/
+.env
+.env.local
+
+
+# Node.js Project (jobboardfe)
+# -----------------------------------------------------------------------------
+# Ignore dependencies
+jobboardfe/node_modules/
+
+# Ignore build output
+jobboardfe/build/
+jobboardfe/dist/
+
+# Ignore caches and logs
+jobboardfe/.cache/
+jobboardfe/.parcel-cache/
+jobboardfe/coverage/
+
+# Ignore environment variables files
+jobboardfe/.env*
