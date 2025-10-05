@@ -29,8 +29,8 @@ jobboardapi/api/appsettings.Development.json
 
 # Ignore user-specific files
 *.pdb
-*.dll
-*.exe
+# *.dll
+# *.exe
 
 # Database files
 *.mdf
