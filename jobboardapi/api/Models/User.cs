@@ -12,18 +12,19 @@ namespace api.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
-        public string Role { get; set; }
+        public int Role { get; set; } // 0: Admin, 1: Employer, 2: Candidate
         public DateTime CreatedAt { get; set; }
         public bool IsActive { get; set; }
 
         // =======================================
-        public int EmployerId { get; set; }
+        public int? EmployerId { get; set; }
+
         [ForeignKey(nameof(EmployerId))]
         public EmployerProfile EmployerProfile { get; set; }
 
-
         // =======================================
-        public int CandidateId { get; set; }
+        public int? CandidateId { get; set; }
+
         [ForeignKey(nameof(CandidateId))]
         public CandidateProfile CandidateProfile { get; set; }
 
@@ -33,6 +34,5 @@ namespace api.Models
 
         [InverseProperty("Receiver")]
         public virtual ICollection<Message> ReceivedMessages { get; set; } = new List<Message>();
-        
     }
 }
