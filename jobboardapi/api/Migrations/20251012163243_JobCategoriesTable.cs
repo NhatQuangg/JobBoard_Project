@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class JobCategories : Migration
+    public partial class JobCategoriesTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,7 @@ namespace api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "JobCategory_Posting",
+                name: "JobCategory_Postings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -40,14 +40,14 @@ namespace api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobCategory_Posting", x => x.Id);
+                    table.PrimaryKey("PK_JobCategory_Postings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_JobCategory_Posting_JobCategories_CategoryId",
+                        name: "FK_JobCategory_Postings_JobCategories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "JobCategories",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_JobCategory_Posting_JobPostings_JobId",
+                        name: "FK_JobCategory_Postings_JobPostings_JobId",
                         column: x => x.JobId,
                         principalTable: "JobPostings",
                         principalColumn: "Id");
@@ -55,13 +55,13 @@ namespace api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobCategory_Posting_CategoryId",
-                table: "JobCategory_Posting",
+                name: "IX_JobCategory_Postings_CategoryId",
+                table: "JobCategory_Postings",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobCategory_Posting_JobId",
-                table: "JobCategory_Posting",
+                name: "IX_JobCategory_Postings_JobId",
+                table: "JobCategory_Postings",
                 column: "JobId");
         }
 
@@ -69,7 +69,7 @@ namespace api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "JobCategory_Posting");
+                name: "JobCategory_Postings");
 
             migrationBuilder.DropTable(
                 name: "JobCategories");
