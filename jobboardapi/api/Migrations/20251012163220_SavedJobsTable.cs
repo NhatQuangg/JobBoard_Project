@@ -7,25 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class SaveJobs : Migration
+    public partial class SavedJobsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_JobPostings_EmployerProfiles_EmployerID",
-                table: "JobPostings");
-
-            migrationBuilder.RenameColumn(
-                name: "EmployerID",
-                table: "JobPostings",
-                newName: "EmployerId");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_JobPostings_EmployerID",
-                table: "JobPostings",
-                newName: "IX_JobPostings_EmployerId");
-
             migrationBuilder.CreateTable(
                 name: "SavedJobs",
                 columns: table => new
@@ -61,41 +47,13 @@ namespace api.Migrations
                 name: "IX_SavedJobs_JobId",
                 table: "SavedJobs",
                 column: "JobId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_JobPostings_EmployerProfiles_EmployerId",
-                table: "JobPostings",
-                column: "EmployerId",
-                principalTable: "EmployerProfiles",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_JobPostings_EmployerProfiles_EmployerId",
-                table: "JobPostings");
-
             migrationBuilder.DropTable(
                 name: "SavedJobs");
-
-            migrationBuilder.RenameColumn(
-                name: "EmployerId",
-                table: "JobPostings",
-                newName: "EmployerID");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_JobPostings_EmployerId",
-                table: "JobPostings",
-                newName: "IX_JobPostings_EmployerID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_JobPostings_EmployerProfiles_EmployerID",
-                table: "JobPostings",
-                column: "EmployerID",
-                principalTable: "EmployerProfiles",
-                principalColumn: "Id");
         }
     }
 }

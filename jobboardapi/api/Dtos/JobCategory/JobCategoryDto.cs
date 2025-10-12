@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api.Models
+namespace api.Dtos.JobCategory
 {
-    public class JobCategory
+    public class JobCategoryDto
     {
         public int Id { get; set; }
         public string? CategoryName { get; set; }
         public string? Description { get; set; }
-
-        public ICollection<JobCategory_Posting> JobPostings { get; set; }
     }
 }

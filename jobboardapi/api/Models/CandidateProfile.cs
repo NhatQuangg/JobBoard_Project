@@ -17,8 +17,8 @@ namespace api.Models
         public DateTime? UpdatedAt { get; set; }
 
         // ===================================
-        // Foreign key
         public int UserId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
     }

@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class Application : Migration
+    public partial class ApplicationAndInterviewTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +19,6 @@ namespace api.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Application_JobPostings_JobId",
                 table: "Application");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Interviews_Application_ApplicationId",
-                table: "Interviews");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Application",
@@ -45,6 +43,39 @@ namespace api.Migrations
                 table: "Applications",
                 column: "Id");
 
+            migrationBuilder.CreateTable(
+                name: "Interviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    InterviewType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Location = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Notes = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ScheduledAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ApplicationId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Interviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Interviews_Applications_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "Applications",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Interviews_ApplicationId",
+                table: "Interviews",
+                column: "ApplicationId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Applications_CandidateProfiles_CandidateId",
                 table: "Applications",
@@ -57,13 +88,6 @@ namespace api.Migrations
                 table: "Applications",
                 column: "JobId",
                 principalTable: "JobPostings",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Interviews_Applications_ApplicationId",
-                table: "Interviews",
-                column: "ApplicationId",
-                principalTable: "Applications",
                 principalColumn: "Id");
         }
 
@@ -78,9 +102,8 @@ namespace api.Migrations
                 name: "FK_Applications_JobPostings_JobId",
                 table: "Applications");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Interviews_Applications_ApplicationId",
-                table: "Interviews");
+            migrationBuilder.DropTable(
+                name: "Interviews");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Applications",
@@ -117,13 +140,6 @@ namespace api.Migrations
                 table: "Application",
                 column: "JobId",
                 principalTable: "JobPostings",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Interviews_Application_ApplicationId",
-                table: "Interviews",
-                column: "ApplicationId",
-                principalTable: "Application",
                 principalColumn: "Id");
         }
     }
